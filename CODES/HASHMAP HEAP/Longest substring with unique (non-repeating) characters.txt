@@ -1,0 +1,32 @@
+import java.util.*;
+
+public class Main {
+			// striver's approach
+	public static int solution(String str) {
+		// write your code here
+		HashMap<Character,Integer> map = new HashMap<>();
+	    int length = 0;
+	    int left=0;
+	    int right=0;
+	    
+	    while(right < str.length()){
+	        char ch = str.charAt(right);
+	        if(map.containsKey(ch))
+	        
+	            left = Math.max(map.get(ch)+1,left);	// +1 isliye kiya h qki left wale ko ek index aage rkhege qki pichla wala toh same tha tbhi toh left ko update kiya
+	            map.put(ch,right);
+	        
+	        length = Math.max(length, right - left +1);		// like 4 se 7 ke bech total 4 no hote h 4,5,6,7 na ki 7-4=3,  mean n-m+1 => (7-4+1)
+	        right++;
+	    }
+		
+		return length;
+	}
+	
+	public static void main(String[] args) {
+		Scanner scn = new Scanner(System.in);
+		String str = scn.next();
+		System.out.println(solution(str));
+	}
+
+}

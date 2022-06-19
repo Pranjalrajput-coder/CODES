@@ -1,0 +1,31 @@
+
+class Solution
+{
+    long subCount(long arr[] ,int n,int k)
+    {
+        
+        HashMap<Integer,Integer> h = new HashMap<>();
+        int sum=0;
+        
+        int ans=0;
+        int rem=0;
+        h.put(0,1);
+        
+        for(long val:arr){
+            sum += val;
+            rem = sum % k;
+            if(rem<0){
+                rem += k;
+            }
+            if(h.containsKey(rem)){
+                ans+=h.get(rem);
+                h.put(rem,h.get(rem)+1);
+            }
+            else{
+                h.put(rem,1);
+            }
+        }
+        return ans;
+        
+    }
+}

@@ -1,0 +1,41 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+
+    public static void main(String[] args) throws Exception {
+
+            Scanner s = new Scanner(System.in);
+            int n = s.nextInt();
+            int [] values = new int[n];
+            int [] wt =  new int[n];
+
+            for(int i=0;i<n;i++){
+                values[i] = s.nextInt();
+            } 
+            for(int i=0;i<n;i++){
+                wt[i] = s.nextInt();
+            }
+
+            int target = s.nextInt();
+
+			int dp[] = new int[target + 1];
+
+			// its same as coin chage permutation
+			for(int i=1;i<dp.length;i++){
+				for(int j=0;j<n;j++){
+
+				int vals = values[j];
+				int wts = wt[j]; 
+
+				if(i>=wts){
+					dp[i] = Math.max(dp[i],dp[i-wts]+vals);
+				}
+
+			}
+			}
+		System.out.println(dp[target]);
+
+    }
+}

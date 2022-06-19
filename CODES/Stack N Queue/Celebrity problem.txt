@@ -1,0 +1,63 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        // write your code here
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int[][] arr = new int[n][n];
+
+        for (int j = 0; j < n; j++) {
+            String line = br.readLine();
+            for (int k = 0; k < n; k++) {
+                arr[j][k] = line.charAt(k) - '0';
+            }
+        }
+
+        findCelebrity(arr);
+    }
+
+    public static void findCelebrity(int[][] arr) {
+       
+       Stack<Integer> stack = new Stack<>();
+
+       for(int i=0;i<arr.length;i++){
+           stack.push(i);
+       }
+
+        while(stack.size()!=1){
+       int top = stack.pop();
+       int top_ke_niche= stack.pop();
+
+       if(arr[top][top_ke_niche]==0){
+           stack.push(top);
+       } 
+       else{
+           stack.push(top_ke_niche);
+       }
+    }
+
+    int last_element = stack.pop();
+    boolean flag = true;
+    for(int i=0;i<arr.length;i++){
+        if(i!=last_element){        // mtlb last element ke liye nahi kr rhe bakiyo ke liye karege
+        if(arr[i][last_element]==0 && arr[last_element][i]==0){
+            flag = false;
+            break;
+        }
+        }
+    }
+        if(flag==true){
+            System.out.println(last_element);
+        }
+        else{
+            System.out.println("none");
+
+        }
+    
+    }
+}
+    
+

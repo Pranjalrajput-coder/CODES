@@ -1,0 +1,49 @@
+import java.io.*;
+import java.util.*;
+
+public class Main{
+
+public static void main(String[] args) throws Exception {
+    // write your code here
+    Scanner  s= new Scanner(System.in);
+    int n = s.nextInt();
+    int arr[] = new int[n+1];
+   int res_mem =  fib_mem(n,arr);
+   int res_tab =  fib_tab(n,arr);
+        System.out.println(res_mem);
+        System.out.println(res_tab);
+ }
+
+public static int fib_tab(int n, int arr[]){
+
+            arr[0]=0;
+            arr[1]= 1;
+
+        for(int i =2 ;i<=n;i++){
+           arr[i] = arr[i-1] + arr[i-2];
+        }
+        return arr[n];
+ }
+
+public static int fib_mem(int n, int arr[]){
+
+
+        if(n==0 || n==1){
+            return n;
+        }
+
+        if(arr[n]!=0){
+            return arr[n];
+        }
+
+        int fn1 = fib_tab(n-1,arr);
+        int fn2 = fib_tab(n-2,arr);
+        int res = fn1 + fn2 ;
+        arr[n] = res;
+
+        return arr[n];
+ }
+
+ 
+
+}

@@ -1,0 +1,36 @@
+import java.util.*;
+
+public class Main {
+
+	public static int solution(String str) {
+		// write your code here
+	    
+	HashMap<Character,Integer> map = new HashMap<>();
+	int left =0;
+	int right=0;
+	int ans=0;	
+	
+	    while(right < str.length()){
+	        char ch = str.charAt(right);
+	     
+	        if(map.containsKey(ch))
+	            left = Math.max(map.get(ch) + 1, left);
+	            
+	            map.put(ch,right);
+	            
+	        ans += right - left + 1;
+	        
+	        right++;
+	    }
+	
+	
+	return ans;
+	}
+	
+	public static void main(String[] args) {
+		Scanner scn = new Scanner(System.in);
+		String str = scn.next();
+		System.out.println(solution(str));
+	}
+
+}

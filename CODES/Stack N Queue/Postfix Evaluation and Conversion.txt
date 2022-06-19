@@ -1,0 +1,67 @@
+import java.io.*;
+import java.util.*;
+
+public class Main{
+  
+
+public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String exp = br.readLine();
+
+    // code
+    Stack<Integer> val = new Stack<>();
+    Stack<String> prefix = new Stack<>();
+    Stack<String> infix = new Stack<>();
+
+    for(int i=0;i<exp.length();i++){
+        char ch = exp.charAt(i);
+
+        if(ch >= '0' && ch<='9'){
+            int num = ch - '0';
+            val.push(num);
+            prefix.push(num + "");
+            infix.push(num + ""); 
+        }
+
+        else{
+
+            int v2 = val.pop();
+            int v1 = val.pop();
+            int result = calculate(v1,v2,ch);
+            val.push(result);
+
+
+            String inv2 = infix.pop();
+            String inv1 = infix.pop();
+            String infixresult  = "(" + inv1 + ch + inv2 + ")";
+            infix.push(infixresult);
+
+            
+            String prev2 = prefix.pop();
+            String prev1 = prefix.pop();
+            String preresult = ch + prev1 + prev2;
+            prefix.push(preresult);
+
+        }
+    }
+        System.out.println(val.peek());
+        System.out.println(infix.peek());
+        System.out.println(prefix.peek());
+    
+
+ }
+ static int calculate(int v1,int v2, char ch){
+     if(ch=='+'){
+         return v1 + v2;
+     }
+     else if(ch=='-'){
+         return v1 - v2;
+     }
+     else if(ch=='*'){
+            return v1 * v2;
+     }
+     else {
+            return v1 / v2;
+     }
+ }
+}

@@ -1,0 +1,45 @@
+import java.util.*;
+
+public class Main {
+	public static int[] anagramMappings(int[] arr1, int[] arr2) {
+		
+		HashMap<Integer,ArrayList<Integer>> map = new HashMap<>();
+		
+		for(int i=0;i<arr2.length;i++){
+		    if(map.containsKey(arr2[i])){       // agar woh arr[i] key h already hashmap me toh arr2 me ayi new wali uske aage store ho jaegi
+		        map.get(arr2[i]).add(i);        
+		    }
+            else{       // nahi toh ek new array list banao aur phir usme index ki value store kro
+                ArrayList<Integer> al = new ArrayList<>();
+                al.add(i);
+                map.put(arr2[i],al);
+            }
+		}
+		int res[] = new int[arr1.length];
+		
+		for(int i=0;i<arr1.length;i++){
+		res[i] = map.get(arr1[i]).remove(0);    // 0th index se remove krke res array me store kr ni h index value, aur value aage wali piche ajaegi khud ek number
+		}
+		
+return res;
+	
+	}
+
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		int n = s.nextInt();
+		int[] a = new int[n];
+		int[] b = new int[n];
+		for (int i = 0; i < a.length; i++) {
+			a[i] = s.nextInt();
+		}
+		for (int j = 0; j < b.length; j++) {
+			b[j] = s.nextInt();
+		}
+		int[] res = anagramMappings(a, b);
+		for (int j = 0; j < res.length; j++) {
+			System.out.print(res[j] + " ");
+		}
+	}
+
+}

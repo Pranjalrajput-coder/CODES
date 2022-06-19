@@ -1,0 +1,55 @@
+import java.util.*;
+
+public class Main {
+	
+	public static void solution(int[] arr, int k){
+		//write your code here
+		HashMap<Integer,Integer> map = new HashMap<>();
+		
+		for(int val:arr){
+		    int res = val % k;
+		    if(map.containsKey(res)){
+		        map.put(res,map.getOrDefault(res,0)+1);
+		    }
+		    else{
+		        map.put(res,1);
+		    }
+		}
+		
+		for(int val:arr){
+		    int res = val % k;
+		    if(res==0){             // for zero only
+		        if(map.get(res)%2!=0){      // check that freqs are even or not
+		            System.out.println("false");
+		            return;
+		        }
+		    }
+		    else if(2 * res == k){      // for center key 
+		        if(map.get(res) % 2 !=0){
+		            System.out.println("false");
+		            return;
+		        }
+		    }
+		    else{
+		        if(map.get(res)!= map.get(k-res)){      // for n and k -n like 1 and 4 , 2 and 3 
+		            System.out.println("false");
+		            return;
+		        }
+		    }
+		}
+		System.out.println("true");
+
+	}
+
+	public static void main(String[] args) {
+		Scanner scn = new Scanner(System.in);
+		int n = scn.nextInt();
+		int[] arr = new int[n];
+		for(int i = 0 ; i < n; i++){
+			arr[i] = scn.nextInt();
+		}
+		int k = scn.nextInt();
+		solution(arr,k);
+	}
+
+}

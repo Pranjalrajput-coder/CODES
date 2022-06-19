@@ -1,0 +1,46 @@
+import java.io.*;
+import java.util.*;
+
+public class Main{
+
+public static void main(String[] args) throws Exception {
+    // write your code here
+    Scanner s = new Scanner(System.in);
+    int n1 = s.nextInt();
+    int a1[]=new int[n1];
+    for(int i=0;i<n1;i++){
+        a1[i]=s.nextInt();
+    }
+
+    int n2 = s.nextInt();
+    int a2[]=new int[n2];
+    for(int i=0;i<n2;i++){
+        a2[i]=s.nextInt();
+    }
+
+    HashMap<Integer , Integer> hmp= new HashMap<>();
+
+        for(int val:a1){
+            if(hmp.containsKey(val)==true){
+                int oldfrq = hmp.get(val);
+                int newfreq = oldfrq+1;
+                hmp.put(val,newfreq);
+            }
+            else{
+                hmp.put(val,1);
+            }
+        }
+
+        for(int val:a2 ){
+            if(hmp.containsKey(val)==true && hmp.get(val)>0){   // freq mtlb value 0 se jada ho tbhi andar ka kaam hoga 
+                System.out.println(val);
+                 int oldfrq = hmp.get(val);
+                int newfreq = oldfrq-1;         // us key , val pair me se val ko ek kam krege aur 0 ho gyi toh loop bhar rok dega
+                hmp.put(val,newfreq);
+            }
+        }
+
+
+ }
+
+}

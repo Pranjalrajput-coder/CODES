@@ -1,0 +1,28 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        Scanner s= new Scanner(System.in);
+        int n= s.nextInt();
+        int m= s.nextInt();
+
+        int dp[] = new int[n+1];
+       
+
+        for(int i=1;i<=n;i++){
+            if(i<m){
+                dp[i] = 1;      //agr 5 x 2 ka floor hua toh bs 1 hi tareka h ki dono tiles vertical hi rkh do
+            }
+            else if(i==m){
+                dp[i] = 2;      // agr 5 X 5 ka hua toh 2 tareke h ya toh sari horizontally rkhdo ya saari vertically 
+            }
+            else{
+                dp[i] = dp[i-1] + dp[i - m];
+            }
+        }
+
+        System.out.println(dp[n]);
+    }
+}

@@ -1,0 +1,64 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+            Scanner s = new Scanner(System.in);
+            int n = s.nextInt();
+            int [][] arr = new int[n][3];
+
+          for(int i=0;i<n;i++){
+              arr[i][0] = s.nextInt();
+              arr[i][1] = s.nextInt();
+              arr[i][2] = s.nextInt();
+          }
+
+           int red = arr[0][0];
+           int blue = arr[0][1];
+           int green = arr[0][2];
+
+        for(int i=1;i<n;i++){
+            int new_red = Math.min(blue,green) + arr[i][0];
+            int new_blue = Math.min(red,green) + arr[i][1];
+            int new_green = Math.min(red,blue) + arr[i][2];
+
+            red = new_red;
+            blue = new_blue;
+            green = new_green;
+        }
+
+    System.out.println(Math.min(green,Math.min(blue,red)));
+
+
+
+            // for(int i=0;i<n;i++){
+            //     for(int j=0;j<3;j++){
+            //     arr[i][j] = s.nextInt();
+            //     }
+            // } 
+
+            // int dp[][] = new int[3][n];
+            // dp[0][0] = arr[0][0];
+            // dp[1][0] = arr[0][1];
+            // dp[2][0] = arr[0][2];
+
+            // for(int j=1;j<n;j++){
+      
+
+                         
+            //             dp[1][j] = Math.min(dp[2][j-1],dp[3][j-1]) + arr[j][0];
+                        
+                      
+            //             dp[2][j] = Math.min(dp[3][j-1],dp[1][j-1]) + arr[j][1];
+                            
+                        
+            //                 dp[3][j] = Math.min(dp[1][j-1],dp[2][j-1]) + arr[j][2];
+            // }
+                    
+                
+            
+            // System.out.println(Math.min(dp[1][n-1],Math.min(dp[2][n-1],dp[3][n-1])));
+                  
+    }
+}

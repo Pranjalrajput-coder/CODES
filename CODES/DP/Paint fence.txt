@@ -1,0 +1,25 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+            Scanner s = new Scanner(System.in);
+            
+            int n = s.nextInt();
+            int colors = s.nextInt();
+
+            long same = 0 ;  
+            long different = colors ; //intial conditon me toh 3 hi hoga qki sb alag alag h toha
+            long total_count = same + different;
+
+            for(int i=2;i<=n;i++){
+               same = different;
+                different = total_count * (colors - 1);
+                total_count = same + different;
+
+                
+            }
+            System.out.println(total_count);
+    }
+}

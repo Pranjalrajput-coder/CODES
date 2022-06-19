@@ -1,0 +1,105 @@
+import java.util.*;
+
+public class Main {
+
+  public static class Node{ // generic tree ke liye nodes h bs
+    int data;
+    ArrayList<Node> children = new ArrayList<Node>();
+
+    Node(int data){ 
+      this.data= data;
+    }
+  }
+
+  public static void main(String[] args) {
+   
+   
+    // Node root = new Node(10);
+
+    // Node twenty = new Node(20);
+    // root.children.add(twenty);
+
+    //     Node thirty = new Node(30);
+    // root.children.add(thirty);
+
+    //     Node fourty = new Node(40);
+    // twenty.children.add(fourty);
+
+    //     Node fifty = new Node(50);
+    // twenty.children.add(fifty);
+
+    //     Node sixty = new Node(60);
+    // thirty.children.add(sixty);
+
+  int[] arr = {10,20,50,-1,60,-1,-1,30,70,-1,80,110,-1,120,-1,-1,90,-1,-1,40,100,-1,-1,-1};
+  Node root = construct(arr);
+    levelorder(root);
+
+    // line_wise_levelorder(root);
+  
+  }
+
+public static void levelorder (Node root) {
+  Queue<Node> queue = new ArrayDeque<>();
+
+  queue.add(root);
+
+// Remove-Print-Add_children
+
+  while(queue.size()>0){
+    Node temp= queue.remove();  //remove
+  System.out.println(temp.data);    //print
+
+  for(Node child : temp.children){  //add
+    queue.add(child);
+  }
+    
+  }
+}      // levelorder
+
+// public static void line_wise_levelorder(Node root){
+//     Queue<Node> queue = new ArrayDeque<>();
+//     Queue<Node> cqueue = new ArrayDeque<>();
+//         queue.add(root);
+        
+//         while(queue.size()>0){
+//             Node temp = queue.remove();
+//             System.out.print(temp.data + " ");
+            
+//             for(Node child : temp.children){
+//                 cqueue.add(child);
+//             }
+//          
+//             if(queue.size()==0){     // make new queue and assign cqueue to old queue and cqueue to new queue and then Enter
+//                 queue = cqueue;
+//                 cqueue = new ArrayDeque<>();
+//                 System.out.println();
+//             }
+//         }
+// }      // LineWiseLevelOrder
+
+public static Node construct(int [] arr){
+    
+    Node root =null;
+    Stack<Node> s = new Stack<>();
+    for(int val : arr){
+    if(val ==-1){
+          Node temp = s.pop();
+        if(s.size()>0){
+      
+        Node top = s.peek();
+        top.children.add(temp);
+    }
+    else{
+        root = temp;
+    }
+    }
+    else{
+        Node node = new Node(val);
+        s.push(node);
+    }
+    }
+    return root;
+}
+
+}

@@ -1,0 +1,62 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        // write your code here
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+
+        int res_mem = climbstairs_mem(n,new int[n+1]);
+        int res_tab = climbstairs_tab(n,new int[n+1]);
+        System.out.println(res_tab);
+    }
+
+    public static int climbstairs_mem(int n , int[] strg) {
+        
+        if(n==0){
+            return 1 ;
+        }
+        else if(n<0){
+            return 0;
+        }
+
+        if(strg[n]!=0){
+            return strg[n];
+        }
+
+        int jump1 = climbstairs_mem(n-1,strg);
+        int jump2 = climbstairs_mem(n-2,strg);
+        int jump3 = climbstairs_mem(n-3,strg);
+        int result_of_all_jumps = jump1 + jump2 + jump3;
+
+        strg[n] = result_of_all_jumps;
+
+        return strg[n]; 
+        
+
+    }
+
+        public static int climbstairs_tab(int n, int [] strg){
+            strg[0]=1;
+
+        for(int i=1;i<=n;i++){
+            
+
+            if(i==1){
+                    strg[1] = strg[i-1];
+            }
+            else if(i==2){
+                    strg[2] = strg[i-1] + strg[i-2];
+            }
+            else {
+
+                    strg[i] = strg[i-1] + strg[i-2] + strg[i-3];
+            }
+            }
+        
+            return strg[n];
+        }
+
+}

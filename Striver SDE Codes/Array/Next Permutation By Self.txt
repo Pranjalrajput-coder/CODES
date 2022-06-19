@@ -1,0 +1,32 @@
+class Solution {
+    public void nextPermutation(int[] nums) {
+        if(nums.length==0 || nums.length <= 1){
+            return;
+        }
+        
+        for(int i=nums.length - 2 ; i>=0;i--){
+            if(nums[i] <= nums[i+1]){
+                for(int j=nums.length - 2; j>=i+1;j--){
+                    if(nums[j] > nums[j+1]){
+                        swap(nums,i,j);
+                    }
+                }
+            }
+          
+        reverse(nums,i+1,nums.length-1);
+        }
+    }
+    
+    public void swap(int[]arr ,int i,int j){
+       int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    public void reverse(int[]arr,int idx,int last){
+        while(idx<last){
+            swap(arr,idx,last);
+            idx++;
+            last--;
+        }
+    }
+}

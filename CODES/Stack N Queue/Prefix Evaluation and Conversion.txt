@@ -1,0 +1,73 @@
+import java.io.*;
+import java.util.*;
+
+public class Main{
+  
+
+public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String exp = br.readLine();
+
+    // code
+    Stack<Integer> val = new Stack<>();
+    Stack<String> postfix = new Stack<>();
+    Stack<String> infix = new Stack<>();
+
+    // is wale question me value 1 upar wali hoti h agr loop ulta chala rahe h toh aur agr hume prefix diya hua h toh
+	// qki hum operand se phle milna chate h na ki operator se
+
+    for(int i=exp.length()-1;i>=0 ; i--){
+        char ch = exp.charAt(i);
+
+        if(ch >= '0' && ch<='9'){
+            int num = ch - '0';
+            val.push(num);
+            postfix.push(num + "");
+            infix.push(num + ""); 
+        }
+
+        else{
+
+            int v1 = val.pop();
+            int v2 = val.pop();
+            int result = calculate(v1,v2,ch);
+            val.push(result);
+
+
+            String inv1 = infix.pop();
+            String inv2 = infix.pop();
+            String infixresult  = "(" + inv1 + ch + inv2 + ")";
+            infix.push(infixresult);
+
+            
+            String post1 = postfix.pop();
+            String post2 = postfix.pop();
+            String postresult =  post1 + post2 + ch;
+            postfix.push(postresult);
+
+        }
+    }
+        System.out.println(val.peek());
+        System.out.println(infix.peek());
+        System.out.println(postfix.peek());
+    
+
+ }
+ static int calculate(int v1,int v2, char ch){
+     if(ch=='+'){
+         return v1 + v2;
+     }
+     else if(ch=='-'){
+         return v1 - v2;
+     }
+     else if(ch=='*'){
+            return v1 * v2;
+     }
+     else if(ch == '/') {
+            return v1 / v2;
+     }
+     else {
+         return 0;
+     }
+ }
+}

@@ -1,0 +1,45 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+
+    public static void main(String[] args) throws Exception {
+
+            Scanner s = new Scanner(System.in);
+            int n = s.nextInt();
+            int [] values = new int[n];
+            int [] wt =  new int[n];
+
+            for(int i=0;i<n;i++){
+                values[i] = s.nextInt();
+            } 
+            for(int i=0;i<n;i++){
+                wt[i] = s.nextInt();
+            }
+
+            int tar_wt = s.nextInt();
+
+            int dp[][] = new int[n+1][tar_wt + 1];
+            
+            for(int i=1;i<=n ;i++){
+                for(int j=1;j<dp[0].length;j++){
+                    int idx = i - 1;    // qki arrray ka 1 dp ke 0 se co incide krta h
+
+                    int wts = wt[idx];
+                    int vals = values[idx];
+                    if(j>=wts){
+                    dp[i][j] = Math.max(dp[i-1][j-wts]  + vals ,dp[i-1][j]) ; 
+                    }
+                    else{
+                        dp[i][j] = dp[i-1][j]; 
+                    }
+                  
+                }
+            }
+
+                System.out.println(dp[n][tar_wt]);
+
+
+    }
+}

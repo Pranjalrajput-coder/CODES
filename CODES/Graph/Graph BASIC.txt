@@ -1,0 +1,34 @@
+import java.util.*;
+
+public class Main {
+
+  static class Edge{
+    int v1;
+    int v2;
+    int wt;
+
+    Edge(int v1,int v2,int wt){
+      this.v1= v1;
+      this.v2= v2;
+      this.wt= wt;
+    }
+  }
+
+  public static void main(String[] args) {
+    // Write your code here
+    ArrayList<Edge>[] graph = new ArrayList[7];
+
+    for(int i=0;i<graph.length;i++){
+      graph[i] = new ArrayList<>();
+    }
+
+    graph[0].add(new Edge(0,1,10));
+    graph[1].add(new Edge(0,1,10));
+    graph[2].add(new Edge(0,1,10));
+    graph[3].add(new Edge(0,1,10));
+    graph[4].add(new Edge(0,1,10));
+    graph[5].add(new Edge(0,1,10));
+    graph[6].add(new Edge(0,1,10));
+  }
+
+}

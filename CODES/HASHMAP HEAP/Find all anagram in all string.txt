@@ -1,0 +1,84 @@
+import java.util.*;
+
+	// we will use Acquire-Release approach strategy
+
+public class Main {
+  public static void findAnagrams(String s, String p) {
+    // write your code here
+
+    HashMap<Character, Integer> fmap = new HashMap<>();
+    HashMap<Character, Integer> smap = new HashMap<>();
+
+    int psize = p.length();
+
+    //get the freq of p string
+
+    for (int i = 0; i < psize; i++) {
+      char sch = p.charAt(i);
+      smap.put(sch, smap.getOrDefault(sch, 0) + 1);
+    }
+
+	// get the freq of s string
+    for (int i = 0; i < psize ; i++) {
+      char fch = s.charAt(i);
+      fmap.put(fch, fmap.getOrDefault(fch, 0) + 1);
+    }
+
+    String ans = "";
+    
+    int count = 0;
+    int i = p.length();
+    int j=0;
+    while(i<s.length()){
+      if (compare(fmap, smap) == true) {		// check that the freq in of both hashmap is same or not
+        count++;
+        ans+= j + " ";
+      }
+
+        //acquire
+        char ch = s.charAt(i);		// acquire from the last end
+        fmap.put(ch, fmap.getOrDefault(ch, 0) + 1);
+
+        //release
+        char chr = s.charAt(j);		// release from the first end
+        if (fmap.get(chr) == 1) {
+          fmap.remove(chr);
+        } else {
+          fmap.put(chr, fmap.get(chr) - 1);
+        }
+        i++;
+	j++;
+    }
+    if (compare(fmap, smap) == true) {
+      count++;
+       ans+= j + " ";
+    }
+
+    System.out.println(count);
+    System.out.println(ans);
+    
+    
+
+  }
+  
+  public static boolean compare( HashMap<Character, Integer> fmap, HashMap<Character, Integer> smap){
+      
+      for(char sch : smap.keySet()){
+          if(fmap.getOrDefault(sch,0)!=smap.get(sch)){    //check that the freq of every char in both maps are same or not
+              return false;		
+          }
+      }
+      
+     return true;
+  }
+
+
+
+public static void main(String[] args) {
+  Scanner scn = new Scanner(System.in);
+  String s = scn.next();
+  String p = scn.next();
+  findAnagrams(s, p);
+}
+
+}

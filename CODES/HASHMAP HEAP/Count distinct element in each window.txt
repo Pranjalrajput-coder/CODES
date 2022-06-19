@@ -1,0 +1,52 @@
+import java.util.*;
+
+public class Main {
+		// We will use Acquire-Release Strategy
+	public static ArrayList<Integer> solution(int[] arr, int k) {
+		//write your code here
+		
+		HashMap<Integer,Integer> map = new HashMap<>();
+		ArrayList<Integer> list = new ArrayList<>(); 
+		
+		for(int i=0;i<=k-2;i++){
+		    map.put(arr[i],map.getOrDefault(arr[i],0)+1);
+		}
+		
+		
+		int j=0;
+		for(int i=k-1;i<arr.length;i++){
+		    //acquire
+		  map.put(arr[i],map.getOrDefault(arr[i],0)+1);
+		  
+	
+		  list.add(map.size());     // add in array list
+		  
+		  // release
+		  if(map.get(arr[j])==1){
+		      map.remove(arr[j]);
+		  }   
+		  else{
+		     map.put(arr[j],map.getOrDefault(arr[j],0)-1);
+		  }
+		  
+		  j++;
+		  	
+		}
+		return list;
+	}
+	
+	public static void main(String[] args) {
+		Scanner scn = new Scanner(System.in);
+		int[] arr = new int[scn.nextInt()];
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = scn.nextInt();
+		}
+		int k = scn.nextInt();
+		ArrayList<Integer> ans = solution(arr,k);
+		for(int a : ans){
+			System.out.print(a + " ");
+		}
+	}
+
+
+}

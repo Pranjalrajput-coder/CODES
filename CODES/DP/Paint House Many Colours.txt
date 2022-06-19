@@ -1,0 +1,65 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+            Scanner s = new Scanner(System.in);
+            int n = s.nextInt();
+            int colors = s.nextInt();
+            int [][] arr = new int[n][colors];
+
+          for(int i=0;i<n;i++){
+           for(int j=0;j<colors;j++){
+               arr[i][j] = s.nextInt();
+           }
+          }
+
+          int dp[][] = new int[n][colors];
+
+          int first_small = Integer.MAX_VALUE;
+          int second_small = Integer.MIN_VALUE;
+
+          for(int i=0;i<colors;i++){         // yh loop first_smallest aur second_smallest nikalne ka loop h
+              dp[0][i] = arr[0][i];
+
+              if(arr[0][i] <= first_small){
+                    second_small = first_small;
+                    first_small = arr[0][i];
+              }
+              else if(arr[0][i] <=second_small){
+                  second_small = arr[0][i];
+              }
+          }
+
+          for(int i=1;i<n;i++){
+
+              int new_fsmall = Integer.MAX_VALUE;
+              int new_ssmall = Integer.MAX_VALUE;
+              
+              for(int j=0;j<colors;j++){
+                  if(first_small == dp[i-1][j]){
+                        dp[i][j] = arr[i][j] + second_small;
+                  }
+                  else{
+                      dp[i][j] = arr[i][j] + first_small;
+                  }
+     
+              if(dp[i][j] <= new_fsmall){
+                    new_ssmall = new_fsmall;
+                    new_fsmall = dp[i][j];
+              }
+              else if(dp[i][j] <=new_ssmall){
+                  new_ssmall = dp[i][j];
+              }
+
+          }
+            first_small = new_fsmall;
+            second_small = new_ssmall;
+              
+          }
+        System.out.println(first_small);
+  
+     
+    }
+}

@@ -1,0 +1,57 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        Scanner s= new Scanner(System.in);
+        int n = s.nextInt();
+        int arr[] = new int[n];
+        for(int i=0;i<n;i++){
+            arr[i] =s.nextInt();
+        }
+        
+        int target = s.nextInt();
+        
+        boolean dp[][] = new boolean[n + 1][target + 1];
+        
+        for(int i=0;i<dp.length;i++){
+            for(int j=0;j<dp[0].length;j++){
+                if(i==0 && j==0){
+                    dp[i][j]=true;
+                }
+                else if(j==0){   // qki zero toh sab hi bana dege
+                    dp[i][j]= true;
+                }
+                else if(i==0){   // qki 0 kuch run nhi bana skta siwai 0 ke
+                    dp[i][j]=false;
+                }
+                else{
+                    // Exclude condition
+                    if(dp[i-1][j]==true){
+                    dp[i][j] = true;
+                    }
+                    else{
+                        //Include Condition
+                        
+                        int val = arr[i - 1] ;// qki dp me agar i = 3 hain toh arr me woh banda i - 1 par hoga                             // qki dp ka 0 kisi bande ke sath align nhi h array me
+                        if(j >= val){
+                            if(dp[i-1][j-val]==true){
+                                dp[i][j]=true;
+                            }
+                        }
+                       
+                    }
+                }
+            }
+        }
+        if(dp[n][target]==true){
+            System.out.println(true);
+            
+        }else{
+            System.out.println(false);
+        }
+        
+
+    }
+}

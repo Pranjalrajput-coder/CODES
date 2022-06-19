@@ -1,0 +1,32 @@
+class Solution {
+    public void setZeroes(int[][] matrix) {
+     
+        int n = matrix.length;
+        int m = matrix[0].length;
+        
+        int darr1[] = new int[n];       //dummy array for row 
+        int darr2[] = new int[m];      //dummy array for column
+         
+        Arrays.fill(darr1,-1);
+        Arrays.fill(darr2,-1);
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(matrix[i][j]==0){
+                    darr1[i]=0;
+                    darr2[j]=0;
+                }
+            }
+        }
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(darr1[i]==0 || darr2[j]==0){
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+        
+       
+    }
+}

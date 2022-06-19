@@ -1,0 +1,29 @@
+import java.io.*;
+import java.util.*;
+
+public class Main{
+
+public static void main(String[] args) throws Exception {
+    // write your code here
+    Scanner s= new Scanner(System.in);
+    int n = s.nextInt();
+
+ 
+    long old_zero = 1;
+    long old_one = 1;
+
+   
+    //0 for building, 1 for space
+    for(int i=2;i<=n;i++){
+           long new_one = old_one + old_zero;
+           long new_zero = old_one;
+
+           old_one = new_one;
+           old_zero = new_zero;
+    }
+    long one_side = old_one + old_zero;
+    long bothsides = one_side * one_side;
+    System.out.println(bothsides);
+ }
+
+}
